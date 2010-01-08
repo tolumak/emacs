@@ -87,6 +87,7 @@
 ;;; Key bindings
 ;;;;;;;;;;;;;;;;;;;;;;;;
 (global-set-key [f2] 'menu-bar-open)
+(global-set-key [f4] 'process-doxygen)
 (global-set-key [f5] 'compile)
 (global-set-key [f6] 'previous-error)
 (global-set-key [f7] 'next-error)
@@ -144,11 +145,18 @@
 ;;; Doxygen
 ;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'doxymacs)
+
 (add-hook 'c-mode-common-hook'doxymacs-mode)
+
 (defun my-doxymacs-font-lock-hook ()
     (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
         (doxymacs-font-lock)))
 (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+
+(defun process-doxygen ()
+  (interactive)
+  (compile "doxygen ; doxytag -t doc/tags.xml doc/*.html")
+)
 
 (defconst doxymacs-my-function-comment-template
  '((let ((next-func (doxymacs-find-next-func)))
@@ -202,8 +210,8 @@
 
 (defun proj-doc-def(project_dir)
   (setq doc_dir (concat project_dir "/doc"))
-  (setq xml_file (concat doc_dir "tags.xml"))
-  (setq project_url (concat "file://" project_dir))
+  (setq xml_file (concat doc_dir "/tags.xml"))
+  (setq project_url (concat "file://" doc_dir))
   (or (file-exists-p doc_dir) (shell-command-to-string (concat "mkdir " doc_dir)))
 
   (add-to-list 'doxymacs-doxygen-dirs (list project_dir xml_file project_url))
@@ -231,8 +239,8 @@
   (setq project project)
 )
 
-(new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint")
-(new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc")
+(new-backbone-project "backbone/mint" "/home/e_mlafon/git-nt/backbone/soft/mint")
+(new-backbone-project "backbone/liblpc" "/home/e_mlafon/git-nt/backbone/soft/lib/liblpc")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
