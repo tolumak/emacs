@@ -19,7 +19,7 @@
   (color-theme-initialize)
   (color-theme-midnight)
   (tool-bar-mode)
-  (set-frame-parameter nil 'fullscreen 'fullboth)
+;;  (set-frame-parameter nil 'fullscreen 'fullboth)
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -239,8 +239,8 @@
   (setq project project)
 )
 
-(new-backbone-project "backbone/mint" "/home/e_mlafon/git-nt/backbone/soft/mint")
-(new-backbone-project "backbone/liblpc" "/home/e_mlafon/git-nt/backbone/soft/lib/liblpc")
+;;(new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint")
+;;(new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -273,8 +273,8 @@
 ;; ** additionnal semantic config
 (require 'semantic-ia)
 
-(setq-default semanticdb-default-save-directory "/home/e_mlafon/emacs/semanticdb")
-(setq-default srecode-map-save-file "/home/e_mlafon/emacs/srecode/srecode-map")
+(setq-default semanticdb-default-save-directory "~/emacs/semanticdb")
+(setq-default srecode-map-save-file "~/emacs/srecode/srecode-map")
 
 ;; addtionnal shortcuts
 (defun my-cedet-hook ()
