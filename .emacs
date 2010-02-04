@@ -239,9 +239,21 @@
   (setq project project)
 )
 
+(defun new-qt-project (project_name project_dir)
+  (setq project (new-ede-project project_name project_dir))
+  (setq qt4-base-dir "/usr/include")
+  (semantic-add-system-include qt4-base-dir 'c++-mode)
+  (add-to-list 'auto-mode-alist (cons qt4-base-dir 'c++-mode))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig.h"))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig-dist.h"))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
+  (setq project project)
+)
+
+
 ;;(new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint")
 ;;(new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc")
-
+(new-qt-project "qt/train_schedule" "~/train_schedule_plasmoid")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; CEDET
