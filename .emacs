@@ -201,11 +201,22 @@
 (global-ede-mode 1)                      ; Enable the Project management system
 (require 'ede)
 
+
+(setq qt4-base-dir "/usr/include/")
+(setq kde4-base-dir "/usr/include/")
+
 (defun proj-inc-dir(project_dir)
   (split-string
    (shell-command-to-string
     (concat "cd " project_dir " && find ./ -type d | sed 's#./#/#'")))
 )
+
+(defun qt4-inc-dir()
+  (split-string
+   (shell-command-to-string
+    (concat "cd " qt4-base-dir " && find ./ -name 'Qt*' -type d | sed 's#./# " qt4-base-dir "#'")))
+)
+
 
 
 (defun proj-doc-def(project_dir)
@@ -239,21 +250,71 @@
   (setq project project)
 )
 
-(defun new-qt-project (project_name project_dir)
+(defun new-qt4-project (project_name project_dir)
   (setq project (new-ede-project project_name project_dir))
-  (setq qt4-base-dir "/usr/include")
-  (semantic-add-system-include qt4-base-dir 'c++-mode)
+
+  (setq inc-dirs (list qt4-base-dir))
+  (nconc inc-dirs (oref project system-include-path))
+  (nconc inc-dirs (qt4-inc-dir))
+  (oset project system-include-path inc-dirs)
+
   (add-to-list 'auto-mode-alist (cons qt4-base-dir 'c++-mode))
-  (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig.h"))
-  (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig-dist.h"))
-  (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "Qt/qconfig.h"))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "Qt/qconfig-dist.h"))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "Qt/qglobal.h"))
+
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_GUI_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_CORE_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_SQL_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_NETWORK_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_SVG_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_OPENGL_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_XML_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_XMLPATTERNS_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_SCRIPT_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_SCRIPTTOOLS_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_COMPAT_EXPORT" . ""))
+
   (setq project project)
 )
 
+(defun new-kde-project (project_name project_dir)
+  (setq project (new-qt4-project project_name project_dir))
 
-;;(new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint")
-;;(new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc")
-(new-qt-project "qt/train_schedule" "~/train_schedule_plasmoid")
+  (setq inc-dirs (list kde4-base-dir (concat kde4-base-dir "KDE/")))
+  (nconc inc-dirs (oref project system-include-path))
+  (oset project system-include-path inc-dirs)
+
+  (add-to-list 'auto-mode-alist (cons kde4-base-dir 'c++-mode))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat kde4-base-dir "kdemacros.h"))
+
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KATE_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KATEINTERFACES_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KDE3SUPPORT_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KDECORE_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KDE_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KDE_FULL_TEMPLATE_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KDE_NO_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KDEUI_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("K_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KFILE_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KHTML_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KIMPROXY_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KIO_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KNOTIFYCONFIG_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KONQ_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KONQSIDEBARPLUGIN_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KPTY_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KSPEECH_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KUTILS_EXPORT" . ""))
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KWIN_EXPORT" . ""))
+
+  (setq project project)
+)
+
+(new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint")
+(new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc")
+(new-kde-project "qt/train_schedule" "~/train_schedule_plasmoid")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; CEDET
