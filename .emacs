@@ -54,7 +54,7 @@
  '(ecb-auto-activate nil)
  '(ecb-compile-window-height 5)
  '(ecb-layout-name "leftright1")
- '(ecb-layout-window-sizes (quote (("leftright1" (ecb-directories-buffer-name 0.1897810218978102 . 0.359375) (ecb-sources-buffer-name 0.1897810218978102 . 0.3125) (ecb-history-buffer-name 0.1897810218978102 . 0.3125) (ecb-methods-buffer-name 0.354014598540146 . 0.984375)))))
+ '(ecb-layout-window-sizes (quote (("leftright1" (0.16058394160583941 . 0.3835616438356164) (0.16058394160583941 . 0.3013698630136986) (0.16058394160583941 . 0.3013698630136986) (0.24817518248175183 . 0.9863013698630136)))))
  '(ecb-options-version "2.40")
  '(ecb-source-path (quote ("/usr/share/emacs/site-lisp/ecb")))
  '(ecb-tip-of-the-day nil)
@@ -196,6 +196,65 @@
 (load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
+;;; CEDET
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Enabling Semantic (code-parsing, smart completion) features
+;; Select one of the following:
+
+;; * This enables the database and idle reparse engines
+;;(semantic-load-enable-minimum-features)
+
+;; * This enables some tools useful for coding, such as summary mode
+;;   imenu support, and the semantic navigator
+;;(semantic-load-enable-code-helpers)
+
+;; * This enables even more coding tools such as intellisense mode
+;;   decoration mode, and stickyfunc mode (plus regular code helpers)
+;;(semantic-load-enable-gaudy-code-helpers)
+
+;; * This enables the use of Exuberent ctags if you have it installed.
+;;   If you use C++ templates or boost, you should NOT enable it.
+;; (semantic-load-enable-all-exuberent-ctags-support)
+
+(semantic-load-enable-gaudy-code-helpers)
+
+;; Enable SRecode (Template management) minor-mode.
+;; (global-srecode-minor-mode 1)
+
+;; ** additionnal semantic config
+(require 'semantic-ia)
+
+(setq-default semanticdb-default-save-directory "~/emacs/semanticdb")
+(setq-default srecode-map-save-file "~/emacs/srecode/srecode-map")
+
+;; addtionnal shortcuts
+(defun my-cedet-hook ()
+  (local-set-key [(control return)] 'semantic-ia-complete-symbol)
+  (local-set-key "\C-xt" 'semantic-analyze-proto-impl-toggle)
+  (local-set-key "\C-ci" 'semantic-decoration-include-visit)
+  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
+  (local-set-key "\C-ce" 'eassist-list-methods)
+  (local-set-key "\C-c\C-r" 'semantic-symref-symbol)
+  (local-set-key "\C-c!" 'semantic-ia-complete-symbol-menu)
+  (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
+  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
+  (local-set-key "\C-c-" 'senator-fold-tag)
+  (local-set-key "\C-c+" 'senator-unfold-tag)
+)
+(add-hook 'c-mode-common-hook 'my-cedet-hook)
+
+;; intellisense on '.' and '->'
+(defun my-c-mode-cedet-hook ()
+  (local-set-key "." 'semantic-complete-self-insert)
+  (local-set-key ">" 'semantic-complete-self-insert)
+;;  (local-set-key "." 'semantic-ia-complete-symbol-menu)
+;;  (local-set-key ">" 'semantic-ia-complete-symbol-menu)
+)
+(add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EDE
 ;;;;;;;;;;;;;;;;;;;;;;;;
 (global-ede-mode 1)                      ; Enable the Project management system
@@ -234,14 +293,16 @@
 
   (proj-doc-def project_dir)
 
+  ;; Load semanticdb cache
+  (dolist (dir (proj-inc-dir project_dir)) (semanticdb-get-database (concat project_dir dir "/")))
+
   (ede-cpp-root-project project_name
 			:name (concat project_name " project")
 			:file file-project
 			:include-path (proj-inc-dir project_dir)
 			:system-include-path '("/usr/include/")
-;			:spp-table '(("isUnix" . "")
-;				     ("BOOST_TEST_DYN_LINK" . ""))
 			)
+
 )
 
 (defun new-backbone-project (project_name project_dir)
@@ -312,67 +373,12 @@
   (setq project project)
 )
 
+(new-backbone-project "backbone/agate_com" "~/git-nt/backbone/soft/application/sample")
 (new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint")
 (new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc")
 (new-kde-project "qt/train_schedule" "~/train_schedule_plasmoid")
+(new-ede-project "test" "/home/e_mlafon/Documents/Tstcedet")
 
-;;;;;;;;;;;;;;;;;;;;;;;;
-;;; CEDET
-;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Enabling Semantic (code-parsing, smart completion) features
-;; Select one of the following:
-
-;; * This enables the database and idle reparse engines
-;;(semantic-load-enable-minimum-features)
-
-;; * This enables some tools useful for coding, such as summary mode
-;;   imenu support, and the semantic navigator
-;;(semantic-load-enable-code-helpers)
-
-;; * This enables even more coding tools such as intellisense mode
-;;   decoration mode, and stickyfunc mode (plus regular code helpers)
-;;(semantic-load-enable-gaudy-code-helpers)
-
-;; * This enables the use of Exuberent ctags if you have it installed.
-;;   If you use C++ templates or boost, you should NOT enable it.
-;; (semantic-load-enable-all-exuberent-ctags-support)
-
-(semantic-load-enable-gaudy-code-helpers)
-
-;; Enable SRecode (Template management) minor-mode.
-;; (global-srecode-minor-mode 1)
-
-;; ** additionnal semantic config
-(require 'semantic-ia)
-
-(setq-default semanticdb-default-save-directory "~/emacs/semanticdb")
-(setq-default srecode-map-save-file "~/emacs/srecode/srecode-map")
-
-;; addtionnal shortcuts
-(defun my-cedet-hook ()
-  (local-set-key [(control return)] 'semantic-ia-complete-symbol)
-  (local-set-key "\C-xt" 'semantic-analyze-proto-impl-toggle)
-  (local-set-key "\C-ci" 'semantic-decoration-include-visit)
-  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
-  (local-set-key "\C-ce" 'eassist-list-methods)
-  (local-set-key "\C-c\C-r" 'semantic-symref-symbol)
-  (local-set-key "\C-c!" 'semantic-ia-complete-symbol-menu)
-  (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
-  (local-set-key "\C-c-" 'senator-fold-tag)
-  (local-set-key "\C-c+" 'senator-unfold-tag)
-)
-(add-hook 'c-mode-common-hook 'my-cedet-hook)
-
-;; intellisense on '.' and '->'
-(defun my-c-mode-cedet-hook ()
-  (local-set-key "." 'semantic-complete-self-insert)
-  (local-set-key ">" 'semantic-complete-self-insert)
-;;  (local-set-key "." 'semantic-ia-complete-symbol-menu)
-;;  (local-set-key ">" 'semantic-ia-complete-symbol-menu)
-)
-(add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ecb
