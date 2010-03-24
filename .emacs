@@ -191,9 +191,16 @@
 (setq inhibit-splash-screen t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
+;;; cscope
+;;;;;;;;;;;;;;;;;;;;;;;;
+(load-file "/usr/share/emacs/site-lisp/xcscope.el")
+(require 'xcscope)
+
+;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; CEDET
 ;;;;;;;;;;;;;;;;;;;;;;;;
-(load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
+;;(load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
+(load-file "~/emacs/cedet/common/cedet.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; CEDET
@@ -226,6 +233,7 @@
 (require 'semantic-ia)
 
 (setq-default semanticdb-default-save-directory "~/emacs/semanticdb")
+(setq-default semanticdb-default-system-save-directory "~/emacs/semanticdb")
 (setq-default srecode-map-save-file "~/emacs/srecode/srecode-map")
 
 ;; addtionnal shortcuts
@@ -308,6 +316,7 @@
 (defun new-backbone-project (project_name project_dir)
   (setq project (new-ede-project project_name project_dir))
   (object-add-to-list project :include-path "~/git-nt/backbone/soft/lib/include")
+  (add-to-list 'semantic-lex-c-preprocessor-symbol-file "~/git-nt/backbone/soft/linux/include/linux/autoconf.h")
   (setq project project)
 )
 
@@ -375,6 +384,7 @@
 
 (new-backbone-project "backbone/agate_com" "~/git-nt/backbone/soft/application/sample")
 (new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint")
+(new-backbone-project "backbone/igmp_snooping" "~/git-nt/backbone/soft/igmp_snooping")
 (new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc")
 (new-kde-project "qt/train_schedule" "~/train_schedule_plasmoid")
 (new-ede-project "test" "/home/e_mlafon/Documents/Tstcedet")
