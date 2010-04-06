@@ -1,0 +1,1 @@
+(load "~/emacs.d/alstom.el")
