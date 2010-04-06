@@ -382,12 +382,13 @@
   (setq project project)
 )
 
-(new-backbone-project "backbone/agate_com" "~/git-nt/backbone/soft/application/sample")
-(new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint")
+;;(new-backbone-project "backbone/agate_com" "~/git-nt/backbone/soft/application/sample")
+;;(new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint")
 (new-backbone-project "backbone/igmp_snooping" "~/git-nt/backbone/soft/igmp_snooping")
-(new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc")
+;;(new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc")
 (new-kde-project "qt/train_schedule" "~/train_schedule_plasmoid")
-(new-ede-project "test" "/home/e_mlafon/Documents/Tstcedet")
+;;(new-kde-project "qt/cpufreq" "~/cpufreq_plasmoid")
+;;(new-ede-project "test" "/home/e_mlafon/Documents/Tstcedet")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -401,3 +402,18 @@
 ;;(require 'ecb-autoloads)
 
 (if (frame-parameter nil 'display) (set-face-font 'ecb-default-general-face (frame-parameter nil 'font) ))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; gnus
+;;;;;;;;;;;;;;;;;;;;;;;;
+(setq gnus-select-method '(nnml ""))
+
+(setq gnus-secondary-select-methods '((nnimap "gmail"
+                                  (nnimap-address "imap.gmail.com")
+                                  (nnimap-server-port 993)
+                                  (nnimap-stream ssl)
+)))
+(add-to-list 'gnus-secondary-select-methods '(nnimap "maison"
+                                  (nnimap-address "routeur3")
+                                  (nnimap-server-port 143)))
