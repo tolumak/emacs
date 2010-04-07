@@ -47,7 +47,7 @@
   (local-set-key "\C-ce" 'eassist-list-methods)
   (local-set-key "\C-c\C-r" 'semantic-symref-symbol)
   (local-set-key "\C-c!" 'semantic-ia-complete-symbol-menu)
-  (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
+  (local-set-key "\C-c:" 'semantic-complete-analyze-inline)
   (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
   (local-set-key "\C-c-" 'senator-fold-tag)
   (local-set-key "\C-c+" 'senator-unfold-tag)
