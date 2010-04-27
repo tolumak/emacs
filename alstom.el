@@ -1,16 +1,17 @@
 
 ;; Backbone EDE projects
-(defun new-backbone-project (project_name project_dir)
-  (setq project (new-ede-project project_name project_dir))
+(defun new-backbone-project (project_name project_dir style)
+  (setq project (new-ede-project project_name project_dir style))
   (object-add-to-list project :include-path "~/git-nt/backbone/soft/lib/include")
   (add-to-list 'semantic-lex-c-preprocessor-symbol-file "~/git-nt/backbone/soft/linux/include/linux/autoconf.h")
   (setq project project)
 )
 
-(new-backbone-project "backbone/agate_com" "~/git-nt/backbone/soft/application/sample")
-(new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint")
-(new-backbone-project "backbone/igmp_snooping" "~/git-nt/backbone/soft/igmp_snooping")
-(new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc")
+(new-backbone-project "backbone/agate_com" "~/git-nt/backbone/soft/application/sample" "linux-tabs-only")
+(new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint" "linux-tabs-only")
+(new-backbone-project "backbone/igmp_snooping" "~/git-nt/backbone/soft/igmp_snooping" "linux-tabs-only")
+(new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc" "linux-tabs-only")
+(new-backbone-project "backbone/libtcoupling" "~/git-nt/backbone/soft/lib/libTcoupling" "linux-tabs-only")
 
 ;; GDB
 (setq gud-gdb-command-name "/opt/eldk/usr/bin/ppc-linux-gdb --annotate=3")

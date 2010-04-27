@@ -1,12 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; C styles
 ;;;;;;;;;;;;;;;;;;;;;;;;
-(defconst my-style
-  '((c-basic-offset . 4) (c-offsets-alist
-			  (substatement-open . 0)
-			  (case-label . +)
-			  ))  "GNU style with basic-offset 4 and open-brace offset 0")
-
 (defconst isc-style
   '((indent-tabs-mode . t) (c-basic-offset . 8) ) "ISC style")
 
@@ -30,7 +24,6 @@
                          c-lineup-gcc-asm-reg
                          c-lineup-arglist-tabs-only)))
 	     )
-	    (c-add-style "mine" my-style)
 	    (c-add-style "isc"  isc-style)
 	    )
 )

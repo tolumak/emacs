@@ -1,7 +1,27 @@
 (setq kde4-base-dir "/usr/include/")
 
-(defun new-kde-project (project_name project_dir)
-  (setq project (new-qt4-project project_name project_dir))
+(defconst kdelibs-style
+  '((indent-tabs-mode . nil) (c-basic-offset . 4) (c-offsets-alist
+			  (substatement-open . 0)
+			  (case-label . 0)
+			  (innamespace . 0)
+			  (topmost-intro-cont . qt-lineup-topmost-intro-cont)
+			  (inher-cont . qt-lineup-inher-cont)
+			  ))  "KDE kdelibs C++-style")
+
+(defconst kdepim-style
+  '((indent-tabs-mode . nil) (c-basic-offset . 2) (c-offsets-alist
+			  (substatement-open . 0)
+			  (case-label . 0)
+			  (innamespace . 0)
+			  (topmost-intro-cont . qt-lineup-topmost-intro-cont)
+			  (inher-cont . qt-lineup-inher-cont)
+			  ))  "KDE kdepim C++-style")
+
+
+
+(defun new-kde-project (project_name project_dir style)
+  (setq project (new-qt4-project project_name project_dir style))
 
   (setq inc-dirs (list kde4-base-dir (concat kde4-base-dir "KDE/")))
   (nconc inc-dirs (oref project system-include-path))
@@ -33,3 +53,10 @@
 
   (setq project project)
 )
+
+(defun c-common-kde-hook ()
+  (c-add-style "kdelibs"  kdelibs-style)
+  (c-add-style "kdepim"   kdepim-style)
+)
+
+(add-hook 'c-mode-common-hook 'c-common-kde-hook)

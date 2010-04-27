@@ -3,6 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 (global-ede-mode 1)                      ; Enable the Project management system
 (require 'ede)
+(setq ede-my-projects ())
 
 (defun proj-inc-dir(project_dir)
   (split-string
@@ -19,7 +20,7 @@
   (add-to-list 'doxymacs-doxygen-dirs (list project_dir xml_file project_url))
 )
 
-(defun new-ede-project (project_name project_dir)
+(defun new-ede-project (project_name project_dir style)
   (setq file-project (concat project_dir "/Project.ede"))
   (or (file-exists-p file-project) (shell-command-to-string (concat "touch " file-project)))
 
@@ -28,13 +29,34 @@
   ;; Load semanticdb cache
   (dolist (dir (proj-inc-dir project_dir)) (semanticdb-get-database (concat project_dir dir "/")))
 
-  (ede-cpp-root-project project_name
+  (setq project (ede-cpp-root-project project_name
 			:name (concat project_name " project")
 			:file file-project
 			:include-path (proj-inc-dir project_dir)
 			:system-include-path '("/usr/include/")
-			)
-
+			))
+  (add-to-list 'ede-my-projects (list project style))
+  (setq project project)
 )
 
 
+(defun set-ede-style (filename projects)
+  (when projects
+     (let ((project-dir (oref (nth 0 (car projects)) directory))
+     	  (style (nth 1 (car projects))))
+       (if (string-match (expand-file-name project-dir)
+     			filename)
+     	  (c-set-style style)
+     	(set-ede-style filename (cdr projects))))
+)
+)
+
+(defun c-common-ede-hook ()
+  (let ((filename (buffer-file-name)))
+    (when filename
+	(set-ede-style filename ede-my-projects)
+      )
+    )
+)
+
+(add-hook 'c-mode-common-hook 'c-common-ede-hook)
