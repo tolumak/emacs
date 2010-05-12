@@ -51,7 +51,7 @@
   (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KUTILS_EXPORT" . ""))
   (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KWIN_EXPORT" . ""))
 
-  (setq project project)
+  project
 )
 
 (defun c-common-kde-hook ()

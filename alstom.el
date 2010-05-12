@@ -1,15 +1,22 @@
+;; Jabber
+(require 'jabber)
+(setq jabber-account-list '(("michel@cditc14afr.dom2.ad.sys")))
 
 ;; Backbone EDE projects
+(defun backbone-project-hook ()
+  (set (make-local-variable 'compile-command) "cd ~/git-nt/backbone/soft ; make -k")
+)
+
 (defun new-backbone-project (project_name project_dir style)
-  (setq project (new-ede-project project_name project_dir style))
+  (setq project (new-ede-project project_name project_dir style 'backbone-project-hook))
   (object-add-to-list project :include-path "~/git-nt/backbone/soft/lib/include")
   (add-to-list 'semantic-lex-c-preprocessor-symbol-file "~/git-nt/backbone/soft/linux/include/linux/autoconf.h")
-  (setq project project)
+  project
 )
 
 (new-backbone-project "backbone/agate_com" "~/git-nt/backbone/soft/application/sample" "linux-tabs-only")
 (new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint" "linux-tabs-only")
-(new-backbone-project "backbone/igmp_snooping" "~/git-nt/backbone/soft/igmp_snooping" "linux-tabs-only")
+(new-backbone-project "backbone/igmp_snooping" "~/git-nt/backbone/soft/igmp_snooping" "gnu")
 (new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc" "linux-tabs-only")
 (new-backbone-project "backbone/libtcoupling" "~/git-nt/backbone/soft/lib/libTcoupling" "linux-tabs-only")
 

@@ -95,7 +95,7 @@
   (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_SCRIPTTOOLS_EXPORT" . ""))
   (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_COMPAT_EXPORT" . ""))
 
-  (setq project project)
+  project
 )
 
 (font-lock-add-keywords 'c++-mode '(("\\<\\(Q_OBJECT\\)\\>" . font-lock-constant-face)))
