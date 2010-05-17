@@ -5,7 +5,6 @@
 (load "~/.emacs.d/c-styles.el")
 (load "~/.emacs.d/magit.el")
 (load "~/.emacs.d/doxygen.el")
-(load "~/.emacs.d/magit.el")
 (load "~/.emacs.d/cscope.el")
 (load "~/.emacs.d/cedet.el")
 (load "~/.emacs.d/ede.el")
@@ -26,17 +25,3 @@
   )
 
 
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(ecb-options-version "2.40"))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(ecb-default-highlight-face ((((class color) (background light)) (:foreground "yellow"))))
- '(font-lock-keyword-face ((((class color) (min-colors 8)) (:foreground "cyan"))))
- '(minibuffer-prompt ((t nil))))

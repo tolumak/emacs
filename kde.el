@@ -19,7 +19,7 @@
 			  ))  "KDE kdepim C++-style")
 
 
-
+(when (require 'ede nil t)
 (defun new-kde-project (project_name project_dir style)
   (setq project (new-qt4-project project_name project_dir style))
 
@@ -52,6 +52,7 @@
   (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("KWIN_EXPORT" . ""))
 
   project
+)
 )
 
 (defun c-common-kde-hook ()

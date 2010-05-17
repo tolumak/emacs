@@ -5,7 +5,7 @@
 (add-to-list 'load-path
                  "/usr/share/emacs/site-lisp/ecb")
 
-(require 'ecb)
+(when (require 'ecb nil t)
 ;;(require 'ecb-autoloads)
 
 (setq ecb-options-version "2.40")
@@ -16,3 +16,4 @@
 (setq ecb-tip-of-the-day nil)
 
 (if (frame-parameter nil 'display) (set-face-font 'ecb-default-general-face (frame-parameter nil 'font) ))
+)

@@ -1,3 +1,5 @@
+(when (require 'cedet nil t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; EDE
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -74,3 +76,5 @@
   )
 
 (add-hook 'c-mode-common-hook 'c-common-ede-hook t)
+
+)

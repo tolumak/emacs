@@ -1,2 +1,2 @@
-(require 'starttls)
+(require 'starttls nil t)
 

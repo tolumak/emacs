@@ -2,7 +2,11 @@
 ;;; CEDET
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;(load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
-(load-file "~/emacs/cedet/common/cedet.el")
+(if (file-exists-p "~/emacs/cedet/common/cedet.el")
+    (load-file "~/emacs/cedet/common/cedet.el")
+  )
+
+(when (require 'cedet nil t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; CEDET
@@ -62,3 +66,5 @@
 ;;  (local-set-key ">" 'semantic-ia-complete-symbol-menu)
 ;;)
 ;;(add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
+
+)

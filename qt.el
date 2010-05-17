@@ -68,6 +68,7 @@
     (concat "cd " qt4-base-dir " && find ./ -name 'Qt*' -type d | sed 's#./# " qt4-base-dir "#'")))
 )
 
+(when (require 'ede nil t)
 
 (defun new-qt4-project (project_name project_dir style)
   (setq project (new-ede-project project_name project_dir style))
@@ -96,6 +97,7 @@
   (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_COMPAT_EXPORT" . ""))
 
   project
+)
 )
 
 (font-lock-add-keywords 'c++-mode '(("\\<\\(Q_OBJECT\\)\\>" . font-lock-constant-face)))
