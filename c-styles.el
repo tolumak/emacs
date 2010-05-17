@@ -34,7 +34,7 @@
                          c-lineup-arglist-tabs-only)))
 	     )
 	    (c-add-style "isc"  isc-style)
-	    (c-add-style "ws-4"  ws-4)
+	    (c-add-style "ws-4"  ws-4-style)
 	    )
 )
 
