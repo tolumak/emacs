@@ -14,7 +14,7 @@
   project
 )
 
-(new-backbone-project "backbone/agate_com" "~/git-nt/backbone/soft/application/sample" "linux-tabs-only")
+(new-backbone-project "backbone/agate_com" "~/git-nt/backbone/soft/application/sample" "ws-4")
 (new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint" "linux-tabs-only")
 (new-backbone-project "backbone/igmp_snooping" "~/git-nt/backbone/soft/igmp_snooping" "gnu")
 (new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc" "linux-tabs-only")
