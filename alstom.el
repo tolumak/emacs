@@ -18,6 +18,7 @@
 (new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint" "linux-tabs-only")
 (new-backbone-project "backbone/igmp_snooping" "~/git-nt/backbone/soft/igmp_snooping" "gnu")
 (new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc" "linux-tabs-only")
+(new-backbone-project "backbone/pimd" "~/git-nt/backbone/soft/pimd" "kdelibs")
 (new-backbone-project "backbone/libtcoupling" "~/git-nt/backbone/soft/lib/libTcoupling" "linux-tabs-only")
 
 ;; GDB
