@@ -1,6 +1,6 @@
-;; Jabber
-(require 'jabber)
-(setq jabber-account-list '(("michel@cditc14afr.dom2.ad.sys")))
+;; ORG
+(setq org-agenda-files ("~/alstom.org"))
+(load-file "~/alstom.org")
 
 ;; Backbone EDE projects
 (defun backbone-project-hook ()
@@ -14,15 +14,23 @@
   project
 )
 
-(new-backbone-project "backbone/agate_com" "~/git-nt/backbone/soft/application/sample" "ws-4")
+(new-backbone-project "backbone/agate_com" "~/git-nt/backbone/soft/agateCom" "ws-4")
 (new-backbone-project "backbone/mint" "~/git-nt/backbone/soft/mint" "linux-tabs-only")
 (new-backbone-project "backbone/igmp_snooping" "~/git-nt/backbone/soft/igmp_snooping" "gnu")
 (new-backbone-project "backbone/liblpc" "~/git-nt/backbone/soft/lib/liblpc" "linux-tabs-only")
 (new-backbone-project "backbone/pimd" "~/git-nt/backbone/soft/pimd" "kdelibs")
+(new-backbone-project "backbone/topology" "~/git-nt/backbone/soft/Topology_Management" "ws-2")
 (new-backbone-project "backbone/libtcoupling" "~/git-nt/backbone/soft/lib/libTcoupling" "linux-tabs-only")
 
 ;; GDB
 (setq gud-gdb-command-name "/opt/eldk/usr/bin/ppc-linux-gdb --annotate=3")
+
+(if nil 
+    (
+
+;; Jabber
+(require 'jabber)
+(setq jabber-account-list '(("michel@cwitc12ubo.dom2.ad.sys")))
 
 ;; Gnus
 (setq starttls-extra-arguments '("--insecure"))
@@ -42,3 +50,4 @@
       smtpmail-smtp-server "localhost"
       smtpmail-smtp-service 10587
       smtpmail-local-domain "mulot.dnsalias.com")
+))

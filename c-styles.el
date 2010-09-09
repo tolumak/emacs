@@ -6,13 +6,25 @@
 
 (defconst ws-4-style
   '(
-    (indent-tabs-mode . t)
+    (indent-tabs-mode . nil)
     (c-basic-offset . 4)
     (c-offsets-alist
      (substatement-open . 0)
      )
     )
   "No tab, 4 whitespaces")
+
+(defconst ws-2-style
+  '(
+    (indent-tabs-mode . nil)
+    (c-basic-offset . 2)
+    (c-offsets-alist
+     (substatement-open . 0)
+     (case-label . +)
+     )
+    )
+  "No tab, 2 whitespaces")
+
 
 (defun c-lineup-arglist-tabs-only (ignored)
   "Line up argument lists by tabs, not spaces"
@@ -35,6 +47,7 @@
 	     )
 	    (c-add-style "isc"  isc-style)
 	    (c-add-style "ws-4"  ws-4-style)
+	    (c-add-style "ws-2"  ws-2-style)
 	    )
 )
 
