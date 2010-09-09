@@ -1,6 +1,6 @@
 ;; ORG
-(setq org-agenda-files ("~/alstom.org"))
-(load-file "~/alstom.org")
+(setq org-agenda-files (quote ("~/alstom.org")))
+(find-file "~/alstom.org")
 
 ;; Backbone EDE projects
 (defun backbone-project-hook ()
