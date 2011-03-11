@@ -21,6 +21,7 @@
 (new-backbone-project "backbone/pimd" "~/git-nt/backbone/soft/pimd" "kdelibs")
 (new-backbone-project "backbone/topology" "~/git-nt/backbone/soft/Topology_Management" "ws-2")
 (new-backbone-project "backbone/libtcoupling" "~/git-nt/backbone/soft/lib/libTcoupling" "linux-tabs-only")
+(new-backbone-project "backbone/libdataplug" "~/git-nt/backbone/soft/lib/libDataplug" "ws-4")
 
 ;; GDB
 (setq gud-gdb-command-name "/opt/eldk/usr/bin/ppc-linux-gdb --annotate=3")
