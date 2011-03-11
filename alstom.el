@@ -4,7 +4,7 @@
 
 ;; Backbone EDE projects
 (defun backbone-project-hook ()
-  (set (make-local-variable 'compile-command) "cd ~/git-nt/backbone/soft ; make -k")
+  (set (make-local-variable 'compile-command) "cd ~/git-nt/backbone/soft ; cd ; . setenv.sh ; cd - ; make -k -j3")
 )
 
 (defun new-backbone-project (project_name project_dir style)
