@@ -10,7 +10,9 @@
 (defun new-backbone-project (project_name project_dir style)
   (setq project (new-ede-project project_name project_dir style 'backbone-project-hook))
   (object-add-to-list project :include-path "~/git-nt/backbone/soft/lib/include")
-  (add-to-list 'semantic-lex-c-preprocessor-symbol-file "~/git-nt/backbone/soft/linux/include/linux/autoconf.h")
+  (if (is-out-of-tree-cedet)
+      (add-to-list 'semantic-lex-c-preprocessor-symbol-file "~/git-nt/backbone/soft/linux/include/linux/autoconf.h")
+    )
   project
 )
 

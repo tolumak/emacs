@@ -29,7 +29,9 @@
   (proj-doc-def project_dir)
 
   ;; Load semanticdb cache
-  (dolist (dir (proj-inc-dir project_dir)) (semanticdb-get-database (concat project_dir dir "/")))
+  (if (is-out-of-tree-cedet)
+      (dolist (dir (proj-inc-dir project_dir)) (semanticdb-get-database (concat project_dir dir "/")))
+)
 
   (setq project (ede-cpp-root-project project_name
 			:name (concat project_name " project")
