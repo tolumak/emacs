@@ -1,6 +1,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Key bindings
 ;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key "\M-b" 'list-buffers)
+(global-set-key "\M-k" 'next-multiframe-window)
+(global-set-key "\M-j" 'previous-multiframe-window)
 (global-set-key [f2] 'menu-bar-open)
 (global-set-key [f4] 'process-doxygen)
 (global-set-key [f5] 'compile)
