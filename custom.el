@@ -8,6 +8,7 @@
 (setq backup-directory-alist (quote (("." . "~/emacs/backup"))))
 (setq indent-tabs-mode t)
 (setq max-specpdl-size 2500)
+(add-to-list 'same-window-buffer-names "*Buffer List*")
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
