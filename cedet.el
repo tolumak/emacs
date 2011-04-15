@@ -3,11 +3,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun is-out-of-tree-cedet()
-  (file-exists-p "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
+  (file-exists-p "~/emacs/cedet/common/cedet.el")
 )
 
 (defun out-of-tree-cedet-configuration()
-  (load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
+  (load-file "~/emacs/cedet/common/cedet.el")
 
   (when (require 'cedet nil t)
     ;; Enabling Semantic (code-parsing, smart completion) features
