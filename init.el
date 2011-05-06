@@ -1,3 +1,5 @@
+(set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1" t)
+
 (load "~/.emacs.d/id.el")
 (load "~/.emacs.d/org.el")
 (load "~/.emacs.d/haskell.el")
