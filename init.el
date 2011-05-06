@@ -5,6 +5,7 @@
 (load "~/.emacs.d/color-theme.el")
 (load "~/.emacs.d/gdb.el")
 (load "~/.emacs.d/c-styles.el")
+(load "~/.emacs.d/whitespace.el")
 (load "~/.emacs.d/magit.el")
 (load "~/.emacs.d/doxygen.el")
 (load "~/.emacs.d/cscope.el")
