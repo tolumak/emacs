@@ -13,3 +13,8 @@
 (global-set-key [f10] 'shrink-window)
 (global-set-key [f11] 'enlarge-window)
 (global-set-key [f12] 'enlarge-window-horizontally)
+
+(when (not (eq (symbol-value 'window-system) nil))
+  (global-unset-key "\C-z")
+  (global-unset-key "\C-x\C-z")
+)
