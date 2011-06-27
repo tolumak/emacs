@@ -70,8 +70,8 @@
 
 (when (require 'ede nil t)
 
-(defun new-qt4-project (project_name project_dir style)
-  (setq project (new-ede-project project_name project_dir style))
+(defun new-qt4-project (project_name project_dir style hook)
+  (setq project (new-ede-project project_name project_dir style hook))
 
   (setq inc-dirs (list qt4-base-dir))
   (nconc inc-dirs (oref project system-include-path))
