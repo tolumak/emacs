@@ -69,8 +69,8 @@
       (when project
 	(let ((style (nth 1 project))
 	     (lhooks (nth 2 project)))
-	  (c-set-style style)
 	  (execute-hooks lhooks)
+	  (c-set-style style)
 	  )
 	)
       )
