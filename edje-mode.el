@@ -66,6 +66,7 @@
                       "style"
                       "styles"
                       "text"
+		      "box"
                       ) t) "\\>\\([ \t]*{\\|\\.\\)")
            '(1 font-lock-function-name-face))
 

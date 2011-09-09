@@ -44,7 +44,7 @@
 )
 
 (defun new-mv2-qt-project (project_name project_dir)
-  (setq qt4-base-dir "~/Mv2/devenv/sysroot/usr/include")
+  (setq qt4-base-dir "~/Mv2/devenv/sysroot/usr/include/")
   (setq project (new-qt4-project project_name project_dir "mv2-qt" 'mv2-project-hook))
   (object-add-to-list project :include-path "~/Mv2/devenv/sysroot/usr/include")
   (object-add-to-list project :include-path "~/Mv2/devenv/sysroot/usr/include/dbus-1.0")
@@ -54,4 +54,8 @@
 
 (new-sise-project "rmz" "~/RMZ" "rmz")
 (new-mv2-project "mv2/libcdbus" "~/Mv2/apps/libcdbus")
+(new-mv2-project "mv2/libcdbus" "~/Mv2/apps/moddump")
 (new-mv2-qt-project "mv2/helloworld" "~/Mv2/apps/helloworld")
+(new-mv2-qt-project "mv2/libqtsise" "~/Mv2/apps/libqtsise")
+(new-mv2-qt-project "mv2/guim" "~/Mv2/apps/guim")
+(new-mv2-project "mv2/controld" "~/Mv2/apps/controld")

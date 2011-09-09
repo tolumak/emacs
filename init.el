@@ -1,4 +1,4 @@
-(set-frame-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1" t)
+(set-face-attribute 'default nil :font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-11-*-*-*-m-0-iso10646-1")
 
 (load "~/.emacs.d/id.el")
 (load "~/.emacs.d/org.el")
@@ -7,6 +7,7 @@
 (load "~/.emacs.d/color-theme.el")
 (load "~/.emacs.d/gdb.el")
 (load "~/.emacs.d/c-styles.el")
+(load "~/.emacs.d/cmake.el")
 (load "~/.emacs.d/e17.el")
 (load "~/.emacs.d/whitespace.el")
 (load "~/.emacs.d/magit.el")
