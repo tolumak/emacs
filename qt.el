@@ -70,16 +70,7 @@
 
 (when (require 'ede nil t)
 
-(defun new-qt4-project (project_name project_dir style hook)
-  (setq project (new-ede-project project_name project_dir style hook))
-
-  (setq inc-dirs (list qt4-base-dir))
-  (nconc inc-dirs (oref project system-include-path))
-  (nconc inc-dirs (qt4-inc-dir))
-  (oset project system-include-path inc-dirs)
-
-  (add-to-list 'auto-mode-alist (cons (expand-file-name qt4-base-dir) 'c++-mode))
-  (add-to-list 'auto-mode-alist (cons (expand-file-name project_dir) 'c++-mode))
+(defun c-preprocessor-hook()
   (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "Qt/qconfig.h"))
   (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "Qt/qconfig-dist.h"))
   (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "Qt/qglobal.h"))
@@ -95,6 +86,18 @@
   (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_SCRIPT_EXPORT" . ""))
   (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_SCRIPTTOOLS_EXPORT" . ""))
   (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_COMPAT_EXPORT" . ""))
+)
+
+(defun new-qt4-project (project_name project_dir style hook)
+  (setq project (new-ede-project project_name project_dir style hook 'c-preprocessor-hook))
+
+  (setq inc-dirs (list qt4-base-dir))
+  (nconc inc-dirs (oref project system-include-path))
+  (nconc inc-dirs (qt4-inc-dir))
+  (oset project system-include-path inc-dirs)
+
+  (add-to-list 'auto-mode-alist (cons (expand-file-name qt4-base-dir) 'c++-mode))
+  (add-to-list 'auto-mode-alist (cons (expand-file-name project_dir) 'c++-mode))
 
   project
 )
