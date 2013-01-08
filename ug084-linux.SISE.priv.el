@@ -24,11 +24,17 @@
 
 (defcustom sise-linux-target nil "SISE Linux environment target")
 (defcustom sise-linux-compile-args "-j3 D=1 install" "SISE Linux environment compile flags")
+(defcustom sise-linux-target-ip nil "SISE Linux target IP address")
 
 
 (defun ask-for-target (target)
   (interactive "MPlease specify the SISE Linux target: ")
   (setq sise-linux-target target)
+)
+
+(defun ask-for-target-ip (target-ip)
+  (interactive "MPlease specify the SISE Linux target IP address: ")
+  (setq sise-linux-target-ip target-ip)
 )
 
 (defun sise-project-hook ()
@@ -41,12 +47,15 @@
 
 (defun copy-and-start ()
   (interactive)
-  (compile (format "find ~/sise-linux/devenv/%s/target/debug/usr -type f -executable -exec /opt/x-tools/powerpc-unknown-linux-gnu/bin/powerpc-unknown-linux-gnu-strip -s '{}' \\\;  ; ssh root@192.168.2.2 '/etc/init.d/S41guim stop ; /etc/init.d/S31controld stop ; /etc/init.d/S31udevmond stop' ; scp -r ~/sise-linux/devenv/%s/target/debug/usr root@192.168.2.2:/ ; ssh root@192.168.2.2 '/etc/init.d/S31controld start ; /etc/init.d/S31udevmond start ; /etc/init.d/S41guim start'" sise-linux-target sise-linux-target))
+  (unless sise-linux-target-ip
+    (call-interactively 'ask-for-target-ip)
+    )
+  (compile (format "target=`echo %s | sed 's#_#/#'` ip=%s; cd ~/sise-linux/devenv/ ; . scripts/setenv.sh %s ; find ~/sise-linux/devenv/$target/debug/usr -type f -executable -exec $TOOLCHAIN_PATH/bin/$TOOLCHAIN_PREFIX-strip -s '{}' \\\;  ; ssh root@$ip '/etc/init.d/S41guim stop ; /etc/init.d/S31controld stop ; /etc/init.d/S31udevmond stop' ; sleep 2 ; scp -r ~/sise-linux/devenv/$target/debug/usr root@$ip:/ ; ssh root@$ip '/etc/init.d/S31controld start ; /etc/init.d/S31udevmond start ; /etc/init.d/S41guim start'" sise-linux-target sise-linux-target-ip sise-linux-target))
 )
 
 (defun sise-linux-compile ()
   (interactive)
-  (compile (format "cd ~/sise-linux/devenv/ ; . setenv.sh %s ; make -k %s" sise-linux-target sise-linux-compile-args))
+  (compile (format "cd ~/sise-linux/devenv/ ; . build.sh %s %s" sise-linux-target sise-linux-compile-args))
 )
 
 (defun sise-linux-project-hook ()
