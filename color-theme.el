@@ -13,7 +13,7 @@
      (region ((t (:background "#a39f1f"))))
      (font-lock-builtin-face ((t (:foreground "#8cbbed"))))
      (font-lock-comment-face ((t (:foreground "#e60036"))))
-     (font-lock-function-name-face ((t (:foreground "#1444ff"))))
+     (font-lock-function-name-face ((t (:foreground "#5598fc"))))
      (font-lock-keyword-face ((t (:foreground "#2f8ef4"))))
      (font-lock-string-face ((t (:foreground "#ad7fa8"))))
      (font-lock-type-face ((t (:foreground"#179603"))))
