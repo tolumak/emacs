@@ -3,37 +3,35 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun is-out-of-tree-cedet()
-  (file-exists-p "~/emacs/cedet/common/cedet.el")
+  (file-exists-p "~/emacs/cedet/cedet-devel-load.el")
 )
 
 (defun out-of-tree-cedet-configuration()
-  (load-file "~/emacs/cedet/common/cedet.el")
+  ;; Load CEDET.
+  ;; See cedet/common/cedet.info for configuration details.
+  ;; IMPORTANT: For Emacs >= 23.2, you must place this *before* any
+  ;; CEDET component (including EIEIO) gets activated by another 
+  ;; package (Gnus, auth-source, ...).
+
+  (load-file "~/emacs/cedet/cedet-devel-load.el")
 
   (when (require 'cedet nil t)
-    ;; Enabling Semantic (code-parsing, smart completion) features
-    ;; Select one of the following:
 
-    ;; * This enables the database and idle reparse engines
-    ;;(semantic-load-enable-minimum-features)
+    ;; Add further minor-modes to be enabled by semantic-mode.
+    ;; See doc-string of `semantic-default-submodes' for other things
+    ;; you can use here.
+    (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode t)
+    (add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode t)
+    (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode t)
 
-    ;; * This enables some tools useful for coding, such as summary mode
-    ;;   imenu support, and the semantic navigator
-    ;;(semantic-load-enable-code-helpers)
+    ;; Enable Semantic
+    (semantic-mode 1)
 
-    ;; * This enables even more coding tools such as intellisense mode
-    ;;   decoration mode, and stickyfunc mode (plus regular code helpers)
-    ;;(semantic-load-enable-gaudy-code-helpers)
-    
-    ;; * This enables the use of Exuberent ctags if you have it installed.
-    ;;   If you use C++ templates or boost, you should NOT enable it.
-    ;; (semantic-load-enable-all-exuberent-ctags-support)
-    (semantic-load-enable-gaudy-code-helpers)
+    ;; Enable EDE (Project Management) features
+    (global-ede-mode 1)
 
-    ;; Enable SRecode (Template management) minor-mode.
-    ;; (global-srecode-minor-mode 1)
-    
-    ;; ** additionnal semantic config
-    (require 'semantic-ia)
+    ;; Load contrib
+    (load-file "~/emacs/cedet/contrib/cedet-contrib-load.el")
     )
 )
 
