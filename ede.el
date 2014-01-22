@@ -10,7 +10,7 @@
 (defun proj-inc-dir(project_dir)
   (split-string
    (shell-command-to-string
-    (concat "cd " project_dir " && find ./ -type d | sed 's#./#/#'")))
+    (concat "cd " project_dir " && find . \\\( -name .git -o -name CMakeFiles \\\) -prune -o \\\( -type d -print \\\) | sed 's#./#/#'")))
 )
 
 (defun proj-doc-def(project_dir)
@@ -31,7 +31,7 @@
   ;; Load semanticdb cache
   (if (is-out-of-tree-cedet)
       (dolist (dir (proj-inc-dir project_dir)) (semanticdb-get-database (concat project_dir dir "/")))
-)
+    )
 
   (setq project (ede-cpp-root-project project_name
 			:name (concat project_name " project")
