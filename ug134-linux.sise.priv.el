@@ -50,7 +50,7 @@
   (unless sise-env-target-ip
     (call-interactively 'ask-for-target-ip)
     )
-  (compile (format "target=`echo %s | sed 's#_#/#'` ip=%s; cd ~/sise-env/devenv/ ; . scripts/setenv.sh %s ; find ~/sise-env/devenv/$target/debug/usr -type f -executable -exec $TOOLCHAIN_PATH/bin/$TOOLCHAIN_PREFIX-strip -s '{}' \\\;  ; ssh root@$ip '/etc/init.d/S66guim stop ; /etc/init.d/S31controld stop ; /etc/init.d/S31udevmond stop' ; sleep 2 ; scp -r ~/sise-env/devenv/$target/debug/usr root@$ip:/ ; ssh root@$ip '/etc/init.d/S31controld start ; /etc/init.d/S31udevmond start ; /etc/init.d/S66guim start'" sise-env-target sise-env-target-ip sise-env-target))
+  (compile (format "target=`echo %s | sed 's#_#/#'` ip=%s; cd ~/sise-env/devenv/ ; . scripts/setenv.sh %s ; find ~/sise-env/devenv/$target/debug/usr -type f -executable -exec $TOOLCHAIN_PATH/bin/$TOOLCHAIN_PREFIX-strip -s '{}' \\\;  ; ssh root@$ip '/etc/init.d/S66guim stop ; /etc/init.d/S31controld stop ; /etc/init.d/S31udevmond stop' ; sleep 2 ; scp -r ~/sise-env/devenv/$target/debug/usr ~/sise-env/devenv/$target/debug/etc root@$ip:/ ; ssh root@$ip '/etc/init.d/S31controld start ; /etc/init.d/S31udevmond start ; /etc/init.d/S66guim start'" sise-env-target sise-env-target-ip sise-env-target))
 )
 
 (defun sise-env-compile ()
@@ -94,9 +94,12 @@
 (new-sise-env-qt-project "sise-env/plotplot" "~/apps/plotplot")
 (new-sise-env-project "sise-env/controld" "~/apps/controld")
 (new-sise-env-project "sise-env/udevmond" "~/apps/udevmond")
+(new-sise-env-project "sise-env/eqtinfo" "~/apps/eqtinfo")
 (new-sise-env-project "sise-env/libsiseconfig" "~/apps/libsiseconfig")
 (new-sise-env-project "sise-env/libtchoutchou" "~/apps/libtchoutchou")
 (new-sise-env-project "sise-env/thc" "~/apps/thc")
 (new-sise-env-project "sise-env/mpc" "~/apps/mpc")
+(new-sise-env-project "sise-env/isc" "~/apps/isc")
 (new-sise-env-project "sise-env/libpiglet" "~/apps/libpiglet")
 (new-sise-env-project "sise-env/pigletctl" "~/apps/pigletctl")
+(new-sise-env-project "sise-env/libheatingcontrol" "~/apps/libheatingcontrol")
