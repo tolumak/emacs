@@ -2,6 +2,7 @@
 
 (load "~/.emacs.d/id.el")
 (load "~/.emacs.d/org.el")
+(load "~/.emacs.d/cedet.el")
 (load "~/.emacs.d/haskell.el")
 (load "~/.emacs.d/x11.el")
 (load "~/.emacs.d/color-theme.el")
@@ -13,7 +14,6 @@
 (load "~/.emacs.d/magit.el")
 (load "~/.emacs.d/doxygen.el")
 (load "~/.emacs.d/cscope.el")
-(load "~/.emacs.d/cedet.el")
 (load "~/.emacs.d/ede.el")
 (load "~/.emacs.d/ecb.el")
 (load "~/.emacs.d/qt.el")
